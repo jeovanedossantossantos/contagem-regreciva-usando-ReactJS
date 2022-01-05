@@ -1,11 +1,11 @@
 import React from "react";
 
-import Countdown from "./components/Countdown";
+import Cronometro2 from "./components/Cronometro2";
 
 export default function App() {
   return (
     <div className="App">
-      <Countdown />
+      <Cronometro2 tempoFinal={1} />
     </div>
   );
 }
