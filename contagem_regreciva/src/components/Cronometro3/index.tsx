@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import { Container } from "./style";
 
 
 interface Cronometro3Props {
@@ -10,47 +11,29 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
   const [minutos1, setMinutos1] = useState(date.getMinutes())
   const [segundos1, setSegundos1] = useState(date.getSeconds())
 
-  const tempoTOTAL = (horas * 3600) + ((minutos1 + tempoFinal) * 60) + segundos1
+  const tempoTOTAL = (horas * 3600) + ((minutos1 + tempoFinal - 1) * 60) + segundos1
 
   // const [minutosFinal, setMinutoFinal] = useState(date.ge)
   // Eu tenho que guradar o tempo da prova e ver quanto tempo se passou
   const [minutos, setMinutos] = useState(tempoFinal - 1)
   const [segundos, setSegundos] = useState(59)
 
-  const [minutos2, setMinutos2] = useState(tempoFinal - 1)
-  const [segundos2, setSegundos2] = useState(59)
 
-  const terminoTempo = () => {
-    const contando = localStorage.getItem('tenpoTotal')
-    // console.log(contando)
-    const lista = [] as any
-    lista.push(contando)
-    const valor = JSON.parse(lista)
-
-    const tempoTotal = JSON.parse(lista)
-
-    let date = new Date()
-    const horas = date.getHours()
-    const minutos1 = date.getMinutes()
-    const segundos1= date.getSeconds()
-
-    const tempoAtual = (horas * 3600) + ((minutos1) * 60) + segundos1
-
-  
-
-    if(tempoAtual>= tempoTotal){
-      return true
-    }
-    return false
-    
-
-
-
+  // if (localStorage.getItem("timeAtual")?.length !== undefined) {
+  if (localStorage.getItem("timeAtual")?.length === undefined) {
+    localStorage.setItem("timeAtual", JSON.stringify({
+      minuto: minutos,
+      segundos: segundos
+    }));
   }
+  const contando = localStorage.getItem("timeAtual")
+  const lista = [] as any
+  lista.push(contando)
+  const valor = JSON.parse(lista)
+ 
+  const [minutos2, setMinutos2] = useState(valor.minuto);
+  const [segundos2, setSegundos2] = useState(valor.segundos)
 
-  useEffect(() => {
-    
-  })
 
   useEffect(() => {
     if (!localStorage.getItem("tenpoTotal")) {
@@ -67,7 +50,7 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
     if (localStorage.getItem("timeFinal")?.length === undefined) {
       let ob = []
       ob.push(({
-        minuto: tempoFinal,
+        minuto: tempoFinal - 1,
         segundos: segundos
       }))
 
@@ -78,37 +61,36 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
         const lista = [] as any
         lista.push(contando)
         const valor = JSON.parse(lista)
-        console.log("Segundos " + valor.segundos);
-        setMinutos(valor.minuto)
-        setSegundos(valor.segundos)
+        
+        setMinutos2(valor.minuto)
+        setSegundos2(valor.segundos)
       }
 
 
-      //  setMinutos(valor.minuto)
-      //  setSegundos(valor.segundos)
-      //  const valores = JSON.parse(contando)
+
 
     }
 
     const paraContagem = setTimeout(() => {
-      if (segundos - 1 < 0) {
-        setSegundos(59)
-        setMinutos(minutos - 1)
+      if (segundos2 - 1 < 0) {
+        setSegundos2(59)
+        setMinutos2(minutos2 - 1)
 
       } else {
-        setSegundos(segundos - 1)
+        setSegundos2(segundos2 - 1)
       }
+
       localStorage.setItem("timeAtual", JSON.stringify({
-        minuto: minutos,
-        segundos: segundos
+        minuto: minutos2,
+        segundos: segundos2
       }));
 
 
     }, 1000);
 
 
-// console.log(terminoTempo())
-    if (terminoTempo() === true) {
+    // console.log(terminoTempo())
+    if (minutos2 <= 0 && segundos2 <= 0) {
 
       clearTimeout(paraContagem)
 
@@ -117,12 +99,25 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
 
 
 
-
+  const pegando = () => {
+    if (localStorage.getItem("timeAtual")?.length === undefined) {
+      const contando = localStorage.getItem("timeAtual")
+      const lista = [] as any
+      lista.push(contando)
+      const valor = JSON.parse(lista)
+      console.log("Segundos " + valor.segundos);
+      setMinutos2(valor.minuto)
+      setSegundos2(valor.segundos)
+    }
+  }
 
   return (
-    <div>
-      {minutos + ":" + segundos}
-    </div>
+    <Container background="blue" color="black" fontSize="80px" width="400px" height="400px">
+      <div>
+        {minutos2 < 10 ? "0" + minutos2 : minutos2} : {segundos2 < 10 ? "0" + segundos2 : segundos2}
+      </div>
+      {/* {minutos2 + ":" + segundos2} */}
+    </Container>
   )
 
 }

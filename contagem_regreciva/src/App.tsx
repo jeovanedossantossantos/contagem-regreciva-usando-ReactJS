@@ -5,7 +5,7 @@ import Cronometro3 from "./components/Cronometro3";
 export default function App() {
   return (
     <div className="App">
-      <Cronometro3 tempoFinal={20} />
+      <Cronometro3 tempoFinal={5} />
     </div>
   );
 }
