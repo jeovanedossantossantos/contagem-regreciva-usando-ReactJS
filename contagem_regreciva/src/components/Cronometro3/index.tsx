@@ -19,7 +19,7 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
   const [segundos, setSegundos] = useState(59)
 
 
-  // if (localStorage.getItem("timeAtual")?.length !== undefined) {
+ 
   if (localStorage.getItem("timeAtual")?.length === undefined) {
     localStorage.setItem("timeAtual", JSON.stringify({
       minuto: minutos,
@@ -99,24 +99,24 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
 
 
 
-  const pegando = () => {
-    if (localStorage.getItem("timeAtual")?.length === undefined) {
-      const contando = localStorage.getItem("timeAtual")
-      const lista = [] as any
-      lista.push(contando)
-      const valor = JSON.parse(lista)
-      console.log("Segundos " + valor.segundos);
-      setMinutos2(valor.minuto)
-      setSegundos2(valor.segundos)
-    }
-  }
+  // const pegando = () => {
+  //   if (localStorage.getItem("timeAtual")?.length === undefined) {
+  //     const contando = localStorage.getItem("timeAtual")
+  //     const lista = [] as any
+  //     lista.push(contando)
+  //     const valor = JSON.parse(lista)
+  //     console.log("Segundos " + valor.segundos);
+  //     setMinutos2(valor.minuto)
+  //     setSegundos2(valor.segundos)
+  //   }
+  // }
 
   return (
     <Container background="blue" color="black" fontSize="80px" width="400px" height="400px">
       <div>
         {minutos2 < 10 ? "0" + minutos2 : minutos2} : {segundos2 < 10 ? "0" + segundos2 : segundos2}
       </div>
-      {/* {minutos2 + ":" + segundos2} */}
+     
     </Container>
   )
 
