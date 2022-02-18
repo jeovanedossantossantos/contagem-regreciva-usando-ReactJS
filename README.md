@@ -23,10 +23,5 @@
             );
         }
 </p>
-<<<<<<< HEAD
 
 <img src="./img/1.png">
-=======
-        
-<img src="./img/1.png">
->>>>>>> 58b44f166ac2bbce3a732ffc9081bba3492285dd
