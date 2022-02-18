@@ -3,6 +3,8 @@
 <h4>Configurando</h4>
 <p>No seu arquivo index.html coloque os seguites links, eles são para importa as fontes usadas</p>
 <p>
+        
+        
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
