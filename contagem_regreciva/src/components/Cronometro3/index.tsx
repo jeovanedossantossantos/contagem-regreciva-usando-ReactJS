@@ -1,11 +1,16 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./style";
 
 
 interface Cronometro3Props {
   tempoFinal: number
+  background?: string | undefined;
+  color?: string | undefined;
+  fontSize?: string | undefined;
+  width?: string | undefined;
+  height?: string | undefined;
 }
-const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
+const Cronometro3 = ({ tempoFinal,background,color,fontSize,width,height }: Cronometro3Props) => {
   let date = new Date()
   const [horas, setHoras] = useState(date.getHours());
   const [minutos1, setMinutos1] = useState(date.getMinutes())
@@ -13,8 +18,6 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
 
   const tempoTOTAL = (horas * 3600) + ((minutos1 + tempoFinal - 1) * 60) + segundos1
 
-  // const [minutosFinal, setMinutoFinal] = useState(date.ge)
-  // Eu tenho que guradar o tempo da prova e ver quanto tempo se passou
   const [minutos, setMinutos] = useState(tempoFinal - 1)
   const [segundos, setSegundos] = useState(59)
 
@@ -88,8 +91,6 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
 
     }, 1000);
 
-
-    // console.log(terminoTempo())
     if (minutos2 <= 0 && segundos2 <= 0) {
 
       clearTimeout(paraContagem)
@@ -98,21 +99,8 @@ const Cronometro3 = ({ tempoFinal }: Cronometro3Props) => {
   })
 
 
-
-  // const pegando = () => {
-  //   if (localStorage.getItem("timeAtual")?.length === undefined) {
-  //     const contando = localStorage.getItem("timeAtual")
-  //     const lista = [] as any
-  //     lista.push(contando)
-  //     const valor = JSON.parse(lista)
-  //     console.log("Segundos " + valor.segundos);
-  //     setMinutos2(valor.minuto)
-  //     setSegundos2(valor.segundos)
-  //   }
-  // }
-
   return (
-    <Container background="blue" color="black" fontSize="80px" width="400px" height="400px">
+    <Container background={background} color={color} fontSize={fontSize} width={width} height={height}>
       <div>
         {minutos2 < 10 ? "0" + minutos2 : minutos2} : {segundos2 < 10 ? "0" + segundos2 : segundos2}
       </div>
